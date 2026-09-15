@@ -30,7 +30,7 @@ app.get('/', middleware, (req, res) => {
     })
 })
 
-app.get('/',(req,res)=>{
+app.get('/data',(req,res)=>{
     res.json({
         main: 'react native',
         route: 'tab/index.js'
