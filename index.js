@@ -1,22 +1,27 @@
-const express = require("express")
+const express = require('express')
+const cors = require('cors')
+const app = express()
+const port = 3000
+app.use(cors())
+app.use(express.json())
 
-const app = express();
-app.use(express.json());
+const middleware = (req,res,next)=>{
+    const clientApiKey = req.headers['x-api-key'];
+    const myScereteApiKey = "n/6h;yutdaou//p34gnmi5pi0s53";
+    if (clientApiKey != myScereteApiKey){
+        return res.status(401).json({ error: "Access Denied. API Key is missing." });
+    }
 
-app.get('/',(req,res)=>{
-    res.send("successfully execute on verscel")
-})
+    next()
+}
 
-app.get('/api/users',(req,res)=>{
+app.get('/',middleware,(req,res)=>{
     res.json({
-        message:"user data is fetched",
-        data: {
-            name:"Nouman aziz",
-            fname: "Aziz Ur Rehman",
-            Education:"Bs Computer Sciense",
-            from: "Karak"
-        }
+        id: 1,
+        name: 'Nouman aziz',
+        fname: 'Aziz ur rehman',
+        from:'Karak',
+        qulification: 'Bs Computer Sciense'
     })
 })
-
 module.exports = app;
