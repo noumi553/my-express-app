@@ -30,4 +30,11 @@ app.get('/', middleware, (req, res) => {
     })
 })
 
+app.get('/',(req,res)=>{
+    res.json({
+        main: 'react native',
+        route: 'tab/index.js'
+    })
+})
+
 module.exports = app;
